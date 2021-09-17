@@ -31,7 +31,15 @@ class OssupdateImg extends Controller
         $FileType = $data['FileType']; //文件后缀
         $content = $data['path']; //原路径
         $tmpFile_A = $data['tmp']; //文件对象
-        $ossSnd = $data['type'] == 1 ? $data['oss']['images'] : $data['oss']['videos']; //oss路径
+        if($data['type'] == 1){ // oss 上传路径
+            $ossSnd = $data['oss']['images'];
+        }else if($data['type'] == 2){
+            $ossSnd =  $data['oss']['videos'];
+        }else if($data['type'] == 3){
+            $ossSnd =  $data['oss']['audios'];
+        }else if($data['type'] == 4){
+            $ossSnd =  $data['oss']['resources'];
+        }
         $object_A =  $ossSnd . md5(time().uniqid()). '.' . $FileType; //上传路径 oss
 //        设置回调
         $url =
